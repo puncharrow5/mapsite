@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 import Header from "./components/Header";
 import { VscFeedback } from "react-icons/vsc";
 import { AiOutlineShareAlt } from "react-icons/ai";
-import "react-toastify/dist/ReactToastify.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 interface Props {
   store: Store;
@@ -62,25 +63,34 @@ const DetailPage: NextPage<Props> = ({ store: Store }) => {
           </div>,
         ]}
       />
+
       <div className="flex justify-center min-h-[100vh] bg-gray-300">
-        <div className="w-2/5 mt-[120px] mb-10 px-[5%] rounded-2xl bg-white shadow-2xl">
-          <h2 className="mt-10 mb-6 text-[40px] text-center font-bold tracking-widest">
+        <div className="w-2/5 mt-[120px] mb-10 px-[5%] bg-white shadow-2xl">
+          <h1 className="mt-10 mb-6 pb-2 border-b-2 text-[40px] text-center font-bold tracking-widest">
             {Store.name}
-          </h2>
-          <div className="flex justify-center w-full mb-6">
-            {Store.images.slice(0, 3).map((image) => (
-              <div key={image}>
-                <Image
-                  src={image}
-                  alt="storeImage"
-                  width={300}
-                  height={300}
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0WhFsDwADzwF2mLYSJgAAAABJRU5ErkJggg=="
-                  priority
-                />
-              </div>
-            ))}
+          </h1>
+
+          <div className="mx-auto w-full mb-6 border-b-2">
+            <Carousel
+              autoPlay
+              showThumbs={false}
+              infiniteLoop
+              className="flex w-full mb-6"
+            >
+              {Store.images.slice(0, 3).map((image) => (
+                <div className="flex-row h-[240px]" key={image}>
+                  <Image
+                    src={image}
+                    alt="storeImage"
+                    fill
+                    sizes="120px"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0WhFsDwADzwF2mLYSJgAAAABJRU5ErkJggg=="
+                    priority
+                  />
+                </div>
+              ))}
+            </Carousel>
           </div>
 
           <div className="pb-4 border-b-2 tracking-wide">
