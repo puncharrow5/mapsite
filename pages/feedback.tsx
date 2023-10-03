@@ -23,6 +23,7 @@ const Feedback = () => {
         }
       );
       toast.success("소중한 의견 감사합니다!");
+      location.reload();
     } catch (error) {
       toast.error("메일 전송이 실패했습니다!");
     }
